@@ -24,9 +24,7 @@ if ($_SERVER['SERVER_PORT'] === 8888 ||
 	$testing = false;
 }
 
-JHTML::_('behavior.mootools');
 $analytics = "UA-XXXXX-X"; // FIXME Update to client ID
-$typekit = null;
 ?>
 
 <head>
@@ -35,7 +33,7 @@ $typekit = null;
 
  	<jdoc:include type="head" />
 
-	<meta name="viewport" content="width=940px, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="shortcut icon" href="/templates/<?= $this->template ?>/resources/favicon.ico">
 	<link rel="apple-touch-icon" href="/templates/<?= $this->template ?>/resources/apple-touch-icon.png">
 
@@ -46,11 +44,11 @@ $typekit = null;
 		<link rel="stylesheet" href="/templates/<?= $this->template ?>/css/template.min.css">
 	<?php endif; ?>
 
-	<script src="/templates/<?= $this->template ?>/js/libs/modernizr-1.7.min.js"></script>
-	<?php if ($typekit): ?>
-	<!-- load typekit -->
-	<script type="text/javascript" src="http://use.typekit.com/<?= $typekit ?>.js"></script>
-	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+	<!-- load modernizer, all other at bottom -->
+	<?php if ($testing): ?>
+		<script src="/templates/<?= $this->template ?>/js/libs/modernizr-1.7.js"></script>
+	<?php else: ?>
+		<script src="/templates/<?= $this->template ?>/js/libs/modernizr-1.7.min.js"></script>
 	<?php endif; ?>
 </head>
 
@@ -85,19 +83,14 @@ $typekit = null;
 		<script src="/templates/<?= $this->template ?>/js/columns.js"></script>
 		<script src="/templates/<?= $this->template ?>/js/dropmenu.js"></script>
 		<script src="/templates/<?= $this->template ?>/js/html5.js"></script>
-		<script src="/templates/<?= $this->template ?>/js/lettering.js"></script>
-		<script src="/templates/<?= $this->template ?>/js/rollover.js"></script>
-		<script src="/templates/<?= $this->template ?>/js/script-init.js"></script>
 	<?php else: ?>
-		<?php if ($analytics): ?>
-			<script>
-				var _gaq=[["_setAccount","<?php echo $analytics?>"],["_trackPageview"]];
-				(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
-					g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
-					s.parentNode.insertBefore(g,s)}(document,"script"));
-		  	</script>
-			<script src="/templates/<?= $this->template ?>/js/scripts.min.js"></script>
-		<?php endif; ?>
+		<script>
+			var _gaq=[["_setAccount","<?php echo $analytics?>"],["_trackPageview"]];
+			(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+				g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
+				s.parentNode.insertBefore(g,s)}(document,"script"));
+	  	</script>
+		<script src="/templates/<?= $this->template ?>/js/scripts.min.js"></script>
 	<?php endif; ?>
 </body>
 </html>

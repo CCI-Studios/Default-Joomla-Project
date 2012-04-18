@@ -15,8 +15,6 @@
 ### github.com/paulirish/html5-boilerplate-server-configs
 ###
 
-RewriteEngine on
-RewriteRule ^admin$ administrator [R=301,L]
 
 
 # ----------------------------------------------------------------------
